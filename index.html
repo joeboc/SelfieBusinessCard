@@ -36,12 +36,30 @@
                     <label for="email">Email</label>
                     <input id="email" type="email" name="email" placeholder="test@email.com" autocomplete="email">
                     </div>
+                    <div class="field">
+                    <label for="photo">Upload Photo</label>
+                    <input id="photo" type="file" name="photo" accept="image/*">
+                    </div>
+                    <div class="field">
+                    <label for="cameraphoto">Take Photo</label>
+                    <input id="cameraphoto" type="cameraphoto" name="cameraphoto" accept="image/*" capture="environment">
+                    </div>
+                    <div class="field">
+                    <label for="infobarcolor">Color</label>
+                    <input id="infobarcolor" type="color" name="infobarcolor">
+                    </div>
                 </fieldset>
-            </form>
+                <fieldset>
+                    <legend>Actions & Buttons</legend>
+                        <button id="applytext" name="applytext" type="button">Apply Text</button>
+                        <button id="download" name="download" type="button">Download</button>
+                </fieldset>
+                </form>
         </section>
-        <section class="preview" id="preview" aria-labelledby="">
+        <section class="preview" id="preview">
             <h2>Preview</h2>
             <p>Image to go Here</p>
+            <canvas id="card">Test</canvas>
         </section>
     </main>
 </body>
