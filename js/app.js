@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", function(){
         contentBottom: 1800-100,
         accentTop: 1800 - 216,
 
-        nameY: 1700,
+        nameY: 1640,
     };
-    Layout.titleY = Layout.nameY + 60;
+    Layout.titleY = Layout.nameY + 56;
     Layout.contactY = Layout.titleY + 56;
     canvas.width = Layout.width;
     canvas.height = Layout.height;
@@ -47,13 +47,17 @@ document.addEventListener("DOMContentLoaded", function(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#FEDF65" //yellow background to see canvas
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#1377a5ff" //accent
+        ctx.fillStyle = "#41d9dc" //accent
         ctx.fillRect(0, Layout.accentTop, Layout.width, Layout.accentHeight);
         ctx.font = "bold 56px Arial"
+        ctx.textBaseline = 'alphabetic';
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#fff';
         ctx.fillStyle = "#000";
-        ctx.fillText(`${fnameInput.value} ${lnameInput.value}`, 120, Layout.nameY);
-        ctx.font = "600 56px Arial"
+        ctx.fillText(`${fnameInput.value} ${lnameInput.value}`, 100, Layout.nameY);
+        ctx.font = "600 26px Arial"
         ctx.fillText(`${jtitleInput.value}`, 100, Layout.titleY);
+        ctx.fillText(`${phoneInput.value} ${emailInput.value}`, 100, Layout.contactY);
     }
 
 });
