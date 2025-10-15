@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function(){
         contentBottom: 1800-100,
         accentTop: 1800 - 216,
 
-        nameY: 1600,
+        nameY: 1700,
     };
     Layout.titleY = Layout.nameY + 60;
     Layout.contactY = Layout.titleY + 56;
@@ -36,17 +36,24 @@ document.addEventListener("DOMContentLoaded", function(){
             lname: lnameInput.value,
             title: jtitleInput.value
         });
-        ctx.fillStyle = "#FEDF65" //yellow background to see canvas
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.font = "bold 56px Arial"
-        ctx.fillStyle = "#000";
-        ctx.fillText(`${fnameInput.value} ${lnameInput.value}`, 100, Layout.nameY)
-        ctx.font = "600 56px Arial"
-        ctx.fillText(`${jtitleInput.value}`, 100, Layout.titleY)
+        render();
     });
 
     downloadphoto.addEventListener("click", () => {
         console.log("Download clicked");
     });
+
+    function render(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#FEDF65" //yellow background to see canvas
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#1377a5ff" //accent
+        ctx.fillRect(0, Layout.accentTop, Layout.width, Layout.accentHeight);
+        ctx.font = "bold 56px Arial"
+        ctx.fillStyle = "#000";
+        ctx.fillText(`${fnameInput.value} ${lnameInput.value}`, 120, Layout.nameY);
+        ctx.font = "600 56px Arial"
+        ctx.fillText(`${jtitleInput.value}`, 100, Layout.titleY);
+    }
 
 });
