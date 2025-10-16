@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function(){
     const downloadphoto = document.getElementById("download");
     const canvas = document.getElementById("card");
     const ctx = canvas.getContext('2d');
+    
+    let photoState = null;
 
     //canvas layout
     const Layout = {
@@ -39,6 +41,11 @@ document.addEventListener("DOMContentLoaded", function(){
         render();
     });
 
+    photoInput.addEventListener('change', () => {
+        console.log("Photo changed", {
+        });
+    });
+
     downloadphoto.addEventListener("click", () => {
         console.log("Download clicked");
     });
@@ -47,17 +54,18 @@ document.addEventListener("DOMContentLoaded", function(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#FEDF65" //yellow background to see canvas
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#41d9dc" //accent
+        ctx.fillStyle = ibarcolor.value //accent
         ctx.fillRect(0, Layout.accentTop, Layout.width, Layout.accentHeight);
         ctx.font = "bold 56px Arial"
         ctx.textBaseline = 'alphabetic';
         ctx.textAlign = 'left';
         ctx.fillStyle = '#fff';
-        ctx.fillStyle = "#000";
-        ctx.fillText(`${fnameInput.value} ${lnameInput.value}`, 100, Layout.nameY);
-        ctx.font = "600 26px Arial"
-        ctx.fillText(`${jtitleInput.value}`, 100, Layout.titleY);
-        ctx.fillText(`${phoneInput.value} ${emailInput.value}`, 100, Layout.contactY);
+        ctx.fillText(`${fnameInput.value} ${lnameInput.value}`, Layout.margin, Layout.nameY);
+        ctx.font = "normal 26px Arial"
+        ctx.fillText(`${jtitleInput.value}`, Layout.margin, Layout.titleY);
+        ctx.fillText(`${phoneInput.value} ${emailInput.value}`, Layout.margin, Layout.contactY);
+        ctx.fillStyle = "#000000"
+        ctx.fillRect(Layout.margin, Layout.margin, Layout.width - Layout.margin * 2,  Layout.accentTop - Layout.margin);
     }
 
 });
