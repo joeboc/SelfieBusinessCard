@@ -27,6 +27,27 @@ document.addEventListener("DOMContentLoaded", function(){
 
         nameY: 1640,
     };
+
+    const formState = {
+        firstName: "",
+        lastName: "",
+        jobTitle: "",
+        phoneNumber: "", 
+        emailAddress: "",
+        accentColor: "41d9dc",
+        photo: null,
+        HTMLImageElement
+    }
+
+    function initfromInputs() {
+        formState.firstName = fnameInput.value.trim();
+        formState.lastName = lnameInput.value.trim();
+        formState.jobTitle = jtitleInput.value.trim();
+        formState.phoneNumber = phoneInput.value.trim();
+        formState.emailAddress = emailInput.value.trim();
+        formState.accentColor = ibarcolor.value.trim();
+    }
+
     Layout.titleY = Layout.nameY + 56;
     Layout.contactY = Layout.titleY + 56;
     canvas.width = Layout.width;
@@ -54,6 +75,8 @@ document.addEventListener("DOMContentLoaded", function(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#FEDF65" //yellow background to see canvas
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#000000"
+        ctx.fillRect(Layout.margin, Layout.margin, Layout.width - Layout.margin * 2,  Layout.accentTop - Layout.margin);
         ctx.fillStyle = ibarcolor.value //accent
         ctx.fillRect(0, Layout.accentTop, Layout.width, Layout.accentHeight);
         ctx.font = "bold 56px Arial"
@@ -64,8 +87,6 @@ document.addEventListener("DOMContentLoaded", function(){
         ctx.font = "normal 26px Arial"
         ctx.fillText(`${jtitleInput.value}`, Layout.margin, Layout.titleY);
         ctx.fillText(`${phoneInput.value} ${emailInput.value}`, Layout.margin, Layout.contactY);
-        ctx.fillStyle = "#000000"
-        ctx.fillRect(Layout.margin, Layout.margin, Layout.width - Layout.margin * 2,  Layout.accentTop - Layout.margin);
     }
 
 });
