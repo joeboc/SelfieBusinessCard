@@ -34,9 +34,8 @@ document.addEventListener("DOMContentLoaded", function(){
         jobTitle: "",
         phoneNumber: "", 
         emailAddress: "",
-        accentColor: "41d9dc",
+        accentColor: "#41d9dc",
         photo: null,
-        HTMLImageElement
     }
 
     function initfromInputs() {
@@ -59,34 +58,98 @@ document.addEventListener("DOMContentLoaded", function(){
             lname: lnameInput.value,
             title: jtitleInput.value
         });
+        initfromInputs();
         render();
     });
 
-    photoInput.addEventListener('change', () => {
-        console.log("Photo changed", {
-        });
+    photoInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0] //Check if Photo is not selected
+        if(!file) return;
+        if(!file.type.startsWith('image/')) return;
+
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+
+        img.onload = () => {
+            const frameX = Layout.margin;
+            const frameY = Layout.margin;
+            const frameW = Layout.width - Layout.margin * 2;
+            const frameH = Layout.accentTop - Layout.margin;
+
+            const scale = Math.max(frameW / img.naturalWidth, frameH / img.naturalHeight);
+            const drawW = img.naturalWidth * scale;
+            const drawH = img.naturalHeight * scale;
+            const drawX = frameX + (frameW - drawW) / 2;
+            const drawY = frameY + (frameH - drawH) / 2;
+
+            photoState = {img, drawX, drawY, drawW, drawH};
+
+            URL.revokeObjectURL(url);
+            render();
+        };
+        img.src = url;
     });
 
     downloadphoto.addEventListener("click", () => {
         console.log("Download clicked");
     });
+    /*Live Listeners*/
+    fnameInput.addEventListener("input", () => {
+        formState.firstName = fnameInput.value.trim();
+        render();
+    });
 
+    lnameInput.addEventListener("input", () => {
+        formState.lastName = lnameInput.value.trim();
+        render();
+    });
+
+    jtitleInput.addEventListener("input", () => {
+        formState.jobTitle = jtitleInput.value.trim();
+        render();
+    });
+
+    phoneInput.addEventListener("input", () => {
+        formState.phoneNumber = phoneInput.value.trim();
+        render();
+    });
+
+    emailInput.addEventListener("input", () => {
+        formState.emailAddress = emailInput.value.trim();
+        render();
+    });
+
+    ibarcolor.addEventListener("input", () => {
+        formState.accentColor = ibarcolor.value.trim();
+        render();
+    });
+    
     function render(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#FEDF65" //yellow background to see canvas
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#000000"
         ctx.fillRect(Layout.margin, Layout.margin, Layout.width - Layout.margin * 2,  Layout.accentTop - Layout.margin);
-        ctx.fillStyle = ibarcolor.value //accent
+        if (photoState) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(Layout.margin, Layout.margin, Layout.width - Layout.margin * 2, Layout.accentTop - Layout.margin);
+            ctx.clip();
+            ctx.drawImage(photoState.img, photoState.drawX, photoState.drawY, photoState.drawW, photoState.drawH);
+            ctx.restore();
+        }
+        ctx.fillStyle = formState.accentColor //accent
         ctx.fillRect(0, Layout.accentTop, Layout.width, Layout.accentHeight);
         ctx.font = "bold 56px Arial"
         ctx.textBaseline = 'alphabetic';
         ctx.textAlign = 'left';
         ctx.fillStyle = '#fff';
-        ctx.fillText(`${fnameInput.value} ${lnameInput.value}`, Layout.margin, Layout.nameY);
+        ctx.fillText(`${formState.firstName} ${formState.lastName}`, Layout.margin, Layout.nameY);
         ctx.font = "normal 26px Arial"
-        ctx.fillText(`${jtitleInput.value}`, Layout.margin, Layout.titleY);
-        ctx.fillText(`${phoneInput.value} ${emailInput.value}`, Layout.margin, Layout.contactY);
+        ctx.fillText(`${formState.jobTitle}`, Layout.margin, Layout.titleY);
+        ctx.fillText(`${formState.phoneNumber} ${formState.emailAddress}`, Layout.margin, Layout.contactY);
     }
 
+    initfromInputs();
+    render();
 });
