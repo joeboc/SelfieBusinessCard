@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", function(){
         render();
     });
 
-    photoInput.addEventListener('change', (e) => {
-        const file = e.target.files && e.target.files[0] //Check if Photo is not selected
+    function handleImageChange(event) {
+        const file = event.target.files && event.target.files[0] //Check if Photo is not selected
         if(!file) return;
         if(!file.type.startsWith('image/')) return;
 
@@ -87,8 +87,19 @@ document.addEventListener("DOMContentLoaded", function(){
             URL.revokeObjectURL(url);
             render();
         };
+
+        img.onerror = () => {
+            URL.revokeObjectURL(url);
+        };
+
         img.src = url;
-    });
+    };
+
+    //On Photo updates
+    
+    photoInput.addEventListener("change", handleImageChange);
+
+    cphotoInput.addEventListener("change", handleImageChange);
 
     downloadphoto.addEventListener("click", () => {
         console.log("Download clicked");
