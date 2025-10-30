@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
         width: 1200,
         height: 1800,
         margin: 100,
+        scale: 1.0,
         accentHeight: 216,
 
         contentTop: 100,
@@ -71,21 +72,52 @@ document.addEventListener("DOMContentLoaded", function(){
         const img = new Image();
 
         img.onload = () => {
+
             const frameX = Layout.margin;
             const frameY = Layout.margin;
             const frameW = Layout.width - Layout.margin * 2;
-            const frameH = Layout.accentTop - Layout.margin;
+            const frameH = Layout.accentTop - Layout.margin * 2;
+
+            Layout.photoFrame = {
+                x: Layout.margin,
+                y: Layout.margin,
+                w: Layout.width - Layout.margin * 2,
+                h: Layout.accentTop - Layout.margin * 2
+            };
 
             const scale = Math.max(frameW / img.naturalWidth, frameH / img.naturalHeight);
+            const minScale = 0.5;
+            const maxScale = 3.0; 
+
             const drawW = img.naturalWidth * scale;
             const drawH = img.naturalHeight * scale;
             const drawX = frameX + (frameW - drawW) / 2;
             const drawY = frameY + (frameH - drawH) / 2;
 
-            photoState = {img, drawX, drawY, drawW, drawH};
+            const baseScale = Math.max(frameW / img.naturalWidth, frameH / img.naturalHeight);
+
+            photoState = {img, drawX, drawY, drawW, drawH, baseScale, minScale, maxScale};
 
             URL.revokeObjectURL(url);
             render();
+        };
+
+        img.onload = () => {
+        const { x: frameX, y:frameY, w: frameW, h: frameH} = Layout.photoFrame;
+        const baseScale = Math.max(frameW / img.naturalWidth, frameH / img.naturalHeight);
+
+        photoState = {
+            img,
+            baseScale,
+            scale: 0.5,
+            minScale: 0.5,
+            maxScale: 3,
+            offsetX: 0,
+            offsetY: 0
+        };
+
+        URL.revokeObjectURL(URL);
+        render();
         };
 
         img.onerror = () => {
