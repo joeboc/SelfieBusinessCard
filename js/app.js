@@ -92,7 +92,21 @@ document.addEventListener("DOMContentLoaded", function(){
 
     downloadphoto.addEventListener("click", () => {
         console.log("Download clicked");
+        render();
+
+        canvas.toBlob((blob) => {
+
+            const url = URL.createObjectURL(blob);
+            const downloadimg = document.createElement("a");
+            downloadimg.download = "business-card.jpg";
+            downloadimg.href = url;
+            document.body.appendChild(downloadimg);
+            downloadimg.click();
+            downloadimg.remove();
+            URL.revokeObjectURL(url);
+        }, "image/jpeg", 0.95);
     });
+
     /*Live Listeners*/
     fnameInput.addEventListener("input", () => {
         formState.firstName = fnameInput.value.trim();
