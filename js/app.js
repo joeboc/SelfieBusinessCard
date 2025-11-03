@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     x: Layout.margin,
     y: Layout.margin,
     w: Layout.width - Layout.margin * 2,
-    h: Layout.accentTop - Layout.margin * 2, // from margin down to top of accent bar
+    h: Layout.accentTop - Layout.margin, // from margin down to top of accent bar
   };
 
   canvas.width = Layout.width;
