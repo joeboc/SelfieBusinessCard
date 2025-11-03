@@ -127,6 +127,29 @@ document.addEventListener("DOMContentLoaded", function(){
         img.src = url;
     };
 
+    function computeDrawRect(){
+        if(!photostate) return null;
+        const {x, y, w, h} = Layout.photoFrame;
+        const currentScale = photoState.baseScale * photoState.scale;
+
+        const drawW = photoState.img.naturalWidth * currentScale;
+        const drawH = phpState.img.naturalHeight * currentScale;
+    
+        let drawX = x + (w - drawW) / 2 + photostate.offsetX;
+        let drawY = y + (h - drawH) / 2 + photostate.offsetY;
+
+        const maxOffsetX = Math.max(0, (drawW - W) / 2);
+        const maxOffsetY = Math.max(0, (drawH - h) / 2);
+
+        photoState.offsetX = Math.min(maxOffsetX, Math.max(-maxOffsetX, photoState.offsetX));
+        photoState.offsetY = Math.min(maxOffsetY, Math.max(-maxOffsetY, photoState.offsetY));
+    
+        drawX = x + (w - drawW) / 2 + photoState.offsetX;
+        drawY = y + (h - drawH) / 2 + photostate.offsetY;
+
+        return {drawX, drawY, drawW, drawH};
+    }
+
     //On Photo updates
     
     photoInput.addEventListener("change", handleImageChange);
@@ -188,6 +211,7 @@ document.addEventListener("DOMContentLoaded", function(){
         ctx.fillStyle = "#000000"
         ctx.fillRect(Layout.margin, Layout.margin, Layout.width - Layout.margin * 2,  Layout.accentTop - Layout.margin);
         if (photoState) {
+            const r = computeDrawRect();
             ctx.save();
             ctx.beginPath();
             ctx.rect(Layout.margin, Layout.margin, Layout.width - Layout.margin * 2, Layout.accentTop - Layout.margin);
