@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const ctx = canvas.getContext("2d");
 
   let photoState = null;
+  let isDragging = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  let pinchState = null;
 
   // Canvas layout
   const Layout = {
@@ -140,6 +145,86 @@ document.addEventListener("DOMContentLoaded", function () {
       0.95
     );
   });
+  //Grab coords relative to canvas
+  function getCanvasPos(evt) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top,
+    };
+  }
+
+  //Drag and Pinch Listeners
+    // --- Touch drag & pinch ---
+  canvas.addEventListener("touchstart", (event) => {
+    if (!photoState) return;
+
+    if (event.touches.length === 1) {
+      // Single finger drag
+      isDragging = true;
+      const touch = event.touches[0];
+      const pos = getCanvasPos(touch);
+      lastX = pos.x;
+      lastY = pos.y;
+    } else if (event.touches.length === 2) {
+      // Start pinch
+      isDragging = false; // ignore drag while pinching
+      const [t1, t2] = event.touches;
+      pinchState = {
+        startDistance: distance(t1, t2),
+        startScale: photoState.scale,
+      };
+    }
+  }, { passive: false });
+
+  canvas.addEventListener("touchmove", (event) => {
+    if (!photoState) return;
+
+    if (event.touches.length === 1 && isDragging && !pinchState) {
+      // Single finger drag
+      event.preventDefault();
+      const touch = event.touches[0];
+      const pos = getCanvasPos(touch);
+      const dx = pos.x - lastX;
+      const dy = pos.y - lastY;
+
+      photoState.offsetX += dx;
+      photoState.offsetY += dy;
+
+      lastX = pos.x;
+      lastY = pos.y;
+
+      render();
+    } else if (event.touches.length === 2 && pinchState) {
+      // Pinch zoom
+      event.preventDefault();
+      const [t1, t2] = event.touches;
+      const newDistance = distance(t1, t2);
+      const ratio = newDistance / pinchState.startDistance;
+
+      let newScale = pinchState.startScale * ratio;
+      newScale = Math.max(photoState.minScale, Math.min(photoState.maxScale, newScale));
+
+      photoState.scale = newScale;
+      render();
+    }
+  }, { passive: false });
+
+  canvas.addEventListener("touchend", (event) => {
+    if (event.touches.length === 0) {
+      // All fingers lifted
+      isDragging = false;
+      pinchState = null;
+    } else if (event.touches.length === 1) {
+      // Went from pinch back to single touch
+      pinchState = null;
+      const touch = event.touches[0];
+      const pos = getCanvasPos(touch);
+      lastX = pos.x;
+      lastY = pos.y;
+    }
+  });
+
 
   // Live listeners
   fnameInput.addEventListener("input", () => {
@@ -164,6 +249,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   ibarcolor.addEventListener("input", () => {
     formState.accentColor = (ibarcolor.value || "#41d9dc").trim();
+    render();
+  });
+
+  canvas.addEventListener('wheel', (event) => {
+    event.preventDefault();
+
+    if (!photoState) return;
+
+    const zoomFactor = event.deltaY < 0 ? 1.1 : 1 / 1.1;
+
+    let newScale = photoState.scale * zoomFactor;
+    newScale = Math.max(photoState.minScale, Math.min(photoState.maxScale, newScale));
+
+    photoState.scale = newScale;
     render();
   });
 
