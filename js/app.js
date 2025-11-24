@@ -57,6 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
     photo: null,
   };
 
+  function distance(t1, t2) {
+  const dx = t2.clientX - t1.clientX;
+  const dy = t2.clientY - t1.clientY;
+  return Math.hypot(dx, dy); // same as Math.sqrt(dx*dx + dy*dy)
+}
+
+
   function initfromInputs() {
     formState.firstName = fnameInput.value.trim();
     formState.lastName = lnameInput.value.trim();
