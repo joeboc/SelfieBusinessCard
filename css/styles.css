@@ -1,0 +1,78 @@
+:root {
+--bg: #f4f1e8;
+--ink: #222;
+--accent: #41d9dc;
+--card-shadow: 0 8px 20px rgba(0,0,0,0.25);
+--radius: 12px;
+}
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body{
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 24px;
+    line-height: 1.4;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.inputs, .preview {
+    flex: 1;
+    max-width: 600px;
+}
+/*Mobile*/
+@media (max-width: 900px){
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+    .inputs, .preview {
+        max-width: 100%;
+    }
+}
+
+.preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.preview h2 {
+    margin-bottom: 1rem;
+}
+
+/*Polaroid Theme*/
+.polaroid {
+    background: white;
+    padding: 1rem;
+    padding-bottom: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    transform: rotate(-2deg);
+    transition: transform 0.2s ease;
+}
+
+.polaroid:hover {
+    transform: rotate(0deg);
+}
+
+.polaroid canvas {
+    width: 100%;
+    height: autp;
+    display: block;
+    border-radius: 4px;
+}
