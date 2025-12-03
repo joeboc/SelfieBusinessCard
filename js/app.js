@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let isDragging = false;
   let lastX = 0;
   let lastY = 0;
+  let adjustMode = false;
 
   let pinchState = null;
 
