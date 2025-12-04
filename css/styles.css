@@ -21,23 +21,20 @@ body{
 }
 
 main {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     padding: 2rem;
-    justify-content: center;
-    align-items: flex-start;
 }
 
 .inputs, .preview {
-    flex: 1;
     max-width: 600px;
+    width: 100%;
 }
 /*Mobile*/
 @media (max-width: 900px){
     main {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
     }
     .inputs, .preview {
         max-width: 100%;
@@ -72,7 +69,72 @@ main {
 
 .polaroid canvas {
     width: 100%;
-    height: autp;
+    height: auto;
     display: block;
     border-radius: 4px;
+}
+
+.polaroid .caption {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: #444;
+    font-style: italic;
+}
+
+/**/
+.inputs h2 {
+    margin-bottom: 1rem;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius);
+    background: white;
+    box-shadow: var(--card-shadow);
+}
+
+legend {
+    padding: 0 0.5rem;
+    font-weight: bold;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+label {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="color"],
+input[type="file"] {
+    padding: 0.5rem;
+    border: 1px solid #bbb;
+    border-radius: var(--radius);
+    font-size: 1rem;
+}
+
+button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    transition: background 0.2s ease;
+}
+
+button:hover {
+    background: #2bbbc0;
 }
