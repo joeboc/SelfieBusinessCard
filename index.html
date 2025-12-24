@@ -8,63 +8,65 @@
     <script src="js/app.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Selfie Business Card Site</h1>
-        <p>The Professional Solution for memorable Business Cards</p>
-    </header>
-    <main>
-        <section class="inputs">
-            <h2>Details</h2>
-            <form>
-                <fieldset>
-                    <legend>Professional Info</legend>
-                    <div class="field">
-                    <label for="fname">First Name</label>
-                    <input id="fname" type="text" name="fname" placeholder="Bob" autocomplete="given-name">
-                    </div>
-                    <div class="field">
-                    <label for="lname">Last Name</label>
-                    <input id="lname" type="text" name="lname" placeholder="Smith" autocomplete="family-name">
-                    </div>
-                    <div class="field">
-                    <label for="jobtitle">Job Title</label>
-                    <input id="jobtitle" type="text" name="jobtitle" placeholder="Software Solutions Engineer" autocomplete="organization-title">
-                    </div>
-                    <div class="field">
-                    <label for="phone">Phone</label>
-                    <input id="phone" type="tel" inputmode="tel" name="phone" placeholder="(555)111-1111" autocomplete="tel">
-                    </div>
-                    <div class="field">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" name="email" placeholder="test@email.com" autocomplete="email">
-                    </div>
-                    <div class="field">
-                    <label for="photo">Upload Photo</label>
-                    <input id="photo" type="file" name="photo" accept="image/*">
-                    </div>
-                    <div class="field">
-                    <label for="cameraphoto">Take Photo</label>
-                    <input id="cameraphoto" type="file" name="cameraphoto" accept="image/*" capture="user">
-                    </div>
-                    <div class="field">
-                    <label for="infobarcolor">Info Bar Color</label>
-                    <input id="infobarcolor" type="color" name="infobarcolor" value="#000000">
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Actions & Buttons</legend>
-                        <button id="applytext" name="applytext" type="button">Apply Text</button>
-                        <button id="download" name="download" type="button">Download</button>
-                </fieldset>
-                </form>
-        </section>
-        <section class="preview" id="preview">
-            <h2>Preview</h2>
-        <div class="polaroid">
-            <p>Image to go Here</p>
-            <canvas id="card" width="1200" height="1800">Test</canvas>
-        </div>
-        </section>
-    </main>
+    <div class="page">
+        <header>
+            <h1>Selfie Business Card Site</h1>
+            <p>The Professional Solution for memorable Business Cards</p>
+        </header>
+        <main>
+            <section class="inputs">
+                <h2>Details</h2>
+                <form>
+                    <fieldset>
+                        <legend>Professional Info</legend>
+                        <div class="field">
+                        <label for="fname">First Name</label>
+                        <input id="fname" type="text" name="fname" placeholder="Bob" autocomplete="given-name">
+                        </div>
+                        <div class="field">
+                        <label for="lname">Last Name</label>
+                        <input id="lname" type="text" name="lname" placeholder="Smith" autocomplete="family-name">
+                        </div>
+                        <div class="field">
+                        <label for="jobtitle">Job Title</label>
+                        <input id="jobtitle" type="text" name="jobtitle" placeholder="Software Solutions Engineer" autocomplete="organization-title">
+                        </div>
+                        <div class="field">
+                        <label for="phone">Phone</label>
+                        <input id="phone" type="tel" inputmode="tel" name="phone" placeholder="(555)111-1111" autocomplete="tel">
+                        </div>
+                        <div class="field">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" name="email" placeholder="test@email.com" autocomplete="email">
+                        </div>
+                        <div class="field">
+                        <label for="photo">Upload Photo</label>
+                        <input id="photo" type="file" name="photo" accept="image/*">
+                        </div>
+                        <div class="field">
+                        <label for="cameraphoto">Take Photo</label>
+                        <input id="cameraphoto" type="file" name="cameraphoto" accept="image/*" capture="user">
+                        </div>
+                        <div class="field">
+                        <label for="infobarcolor">Info Bar Color</label>
+                        <input id="infobarcolor" type="color" name="infobarcolor" value="#000000">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Actions & Buttons</legend>
+                            <button id="applytext" name="applytext" type="button">Apply Text</button>
+                            <button id="download" name="download" type="button">Download</button>
+                    </fieldset>
+                    </form>
+            </section>
+            <section class="preview" id="preview">
+                <h2>Preview</h2>
+            <div class="polaroid">
+                <p>Image to go Here</p>
+                <canvas id="card" width="1200" height="1800">Test</canvas>
+            </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>
