@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const photoInput = document.getElementById("photo");
   const cphotoInput = document.getElementById("cameraphoto");
   const ibarcolor = document.getElementById("infobarcolor");
-  const applytext = document.getElementById("applytext");
   const downloadphoto = document.getElementById("download");
   const canvas = document.getElementById("card");
   const ctx = canvas.getContext("2d");
@@ -73,11 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
     formState.emailAddress = emailInput.value.trim();
     formState.accentColor = (ibarcolor.value || "#41d9dc").trim();
   }
-
-  applytext.addEventListener("click", () => {
-    initfromInputs();
-    render();
-  });
 
   function handleImageChange(event) {
     const file = event.target.files && event.target.files[0];

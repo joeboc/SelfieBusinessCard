@@ -14,11 +14,17 @@ box-sizing: border-box;
 
 body {
     font-family: system-ui, sans-serif;
-    background: #1c1c1c;
+    background:
+        radial-gradient(
+            circle at top,
+            #2a2a2a 0%,
+            #1c1c1c 60%
+        );
     color: var(--ink);
     padding: 24px;
     line-height: 1.4;
 }
+
 
 main {
     display: grid;
@@ -30,11 +36,21 @@ main {
 }
 
 header {
-    display: grid;
-    justify-content: center;
-    gap: 0.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    margin: 0 auto;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+header h1 {
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+
+header p {
+    font-size: 0.85rem;
+    color: #666;
 }
 
 .inputs, .preview {
@@ -55,12 +71,12 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     gap: 0.5rem;
     padding-top: 1rem;
-    background: rgba(0,0,0,0.03);
-    border-radius: var(--radius);
+
+    background: none;
 }
+
 
 .preview h2 {
     margin-bottom: 0.5rem;
@@ -70,11 +86,15 @@ header {
 .page {
   max-width: 1200px;
   margin: 0 auto;
-  background: #fff;
-  border-radius: 16px;
+  background: #ffffff;
+  border-radius: 6px;
   padding: 2rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.35),
+    0 2px 0 rgba(255,255,255,0.6) inset;
 }
+
 
 /*Polaroid Theme*/
 .polaroid {
@@ -161,5 +181,9 @@ button {
 }
 
 button:hover {
-    background: #2bbbc0;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
 }
